@@ -24,9 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final String _loginErrorMessage = '';
-  final bool _isLoginError = false;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -86,21 +83,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           autocorrect: false,
                           validator: (value) => Validator.validateText(value, 'Please enter your password'),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                        ),
-                        AnimatedSize(
-                          duration: const Duration(milliseconds: 125),
-                          child: _isLoginError
-                              ? Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: Text(
-                                    _loginErrorMessage,
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
                         ),
                         const SizedBox(height: 16),
                         SizedBox(

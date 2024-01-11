@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_assessment/app/global/constants/app_constants.dart';
 import 'package:flutter_assessment/app/global/constants/colors.dart';
 import 'package:flutter_assessment/app/providers/theme_provider.dart';
 import 'package:flutter_assessment/app/providers/user_provider.dart';
@@ -19,10 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Profile',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text('Profile', style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -47,11 +45,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             Text(
                               userProvider.user?.name ?? 'NAME',
-                              style: const TextStyle(fontSize: 16),
+                              style: AppConstants.bodyTextStyle(),
                             ),
                             Text(
                               userProvider.user?.email ?? 'EMAIL',
-                              style: const TextStyle(fontSize: 16),
+                              style: AppConstants.bodyTextStyle(),
                             ),
                           ],
                         ),
@@ -120,10 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       radius: 48,
       foregroundColor: isDarkMode ? darkGrey : lightColor,
       backgroundColor: isDarkMode ? lightColor : darkGrey,
-      child: Text(
-        initial,
-        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      ),
+      child: Text(initial, style: AppConstants.titleTextStyle(fontsize: 32)),
     );
   }
 

@@ -38,10 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       appBar: isWideScreen
           ? null
           : AppBar(
-              title: const Text(
-                'Sign up',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              title: const Text('Sign up', style: TextStyle(fontWeight: FontWeight.bold)),
             ),
       body: Center(
         child: SingleChildScrollView(
@@ -67,13 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         if (isWideScreen) ...[
-                          const Text(
-                            'Signup',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          Text('Signup', style: AppConstants.titleTextStyle(fontsize: 24)),
                           const SizedBox(height: 16)
                         ],
                         TextFormField(

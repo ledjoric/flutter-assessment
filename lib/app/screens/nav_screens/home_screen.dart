@@ -58,10 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     bool isWideScreen = MediaQuery.of(context).size.width > 600;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Home Page',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        title: const Text('Home Page', style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         child: Padding(
