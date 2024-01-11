@@ -16,9 +16,9 @@ class AppConstants {
     );
   }
 
-  static TextStyle titleTextStyle() {
-    return const TextStyle(
-      fontSize: 20,
+  static TextStyle titleTextStyle({double fontsize = 20}) {
+    return TextStyle(
+      fontSize: fontsize,
       fontWeight: FontWeight.bold,
     );
   }

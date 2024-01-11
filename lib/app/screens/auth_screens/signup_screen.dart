@@ -81,6 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: AppConstants.textFieldDecoration(label: 'Username'),
                           validator: (value) => Validator.validateName(value, _nameError),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (value) => setState(() => _nameError = null),
                         ),
                         const SizedBox(height: 8),
                         TextFormField(
@@ -88,6 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: AppConstants.textFieldDecoration(label: 'Email'),
                           validator: (value) => Validator.validateEmailSignUp(value, _emailError),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (value) => setState(() => _emailError = null),
                         ),
                         const SizedBox(height: 8),
                         TextFormField(
@@ -95,6 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           decoration: AppConstants.textFieldDecoration(label: 'Password'),
                           validator: (value) => Validator.validatePassword(value, _passwordError),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onChanged: (value) => setState(() => _passwordError = null),
                         ),
                         const SizedBox(height: 16),
                         SizedBox(
@@ -102,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: FilledButton(
                             style: AppConstants.filledButtonStyle(),
                             onPressed: _isLoading ? null : signup,
-                            child: const Text('Sign Up', style: TextStyle(fontSize: 16)),
+                            child: Text('Sign Up', style: AppConstants.titleTextStyle(fontsize: 16)),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -142,14 +145,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           password: _passwordController.text,
         ),
       ).then((response) {
+        setState(() => _isLoading = false);
         if (response['data'] != null) {
+          if (context.mounted) ToastUtil.showToast(context, response['data']['message']);
           if (context.mounted) GoRouter.of(context).go(loginScreen);
         } else if (response['error'] != null) {
           if (response['error']['name'] != null) _nameError = response['error']['name'][0];
           if (response['error']['email'] != null) _emailError = response['error']['email'][0];
           if (response['error']['password'] != null) _passwordError = response['error']['password'][0];
         } else {
-          if (context.mounted) ToastUtil.showToast(context, response['data']['message']);
+          if (context.mounted) ToastUtil.showToast(context, response['message']);
         }
       });
       setState(() => _isLoading = false);

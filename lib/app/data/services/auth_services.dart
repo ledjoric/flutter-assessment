@@ -49,7 +49,7 @@ class AuthService {
         return responseData;
       }
     } catch (e) {
-      return {'message': 'Failed to register. Please check your credentials and try again.'};
+      return {'message': 'Failed to register. Please check your internet and try again.'};
     }
   }
 }

@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final storedToken = await SecureStorageSingleton.read('oauth');
       if (storedToken != null) {
         if (context.mounted) context.go(homeScreen);
@@ -46,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
         statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark ? Brightness.light : Brightness.dark,
       ),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
@@ -109,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: FilledButton(
                             style: AppConstants.filledButtonStyle(),
                             onPressed: _isLoading ? null : login,
-                            child: const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            child: Text('Login', style: AppConstants.titleTextStyle(fontsize: 16)),
                           ),
                         ),
                         const SizedBox(height: 8),
@@ -118,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: OutlinedButton(
                             style: AppConstants.filledButtonStyle(),
                             onPressed: _isLoading ? null : () => GoRouter.of(context).push(signupScreen),
-                            child: const Text('Signup', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                            child: Text('Signup', style: AppConstants.titleTextStyle(fontsize: 16)),
                           ),
                         ),
                       ],
@@ -142,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
           password: _passwordController.text,
         ),
       );
-      setState(() => _isLoading = true);
+      setState(() => _isLoading = false);
 
       if (response['message'] == null) {
         if (context.mounted) GoRouter.of(context).go(homeScreen);
